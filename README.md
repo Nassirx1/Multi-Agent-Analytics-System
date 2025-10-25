@@ -70,7 +70,7 @@ As a student project, this system showcases:
 - **Iterative Code Generation** with quality assurance
 
 ### 📊 **Comprehensive Data Analysis**
-- **format Dataset Support** (CSV)
+- **Multi-format Dataset Support** (CSV, Excel, JSON)
 - **High-Volume Data Handling** with intelligent sampling
 - **Statistical Analysis** with automated visualization
 - **Business Intelligence Translation** for non-technical stakeholders
@@ -92,29 +92,28 @@ As a student project, this system showcases:
 ```mermaid
 graph TD
     A[User Uploads CSV] --> B[Multi-Agent Orchestrator]
-    B --> C[Data Understander Agent]
-    B --> D[Market Researcher Agent]
-    B --> E[Analysis Planner Agent]
-    B --> F[Data Scientist Coder Agent]
-    B --> G[Code Reviewer Agent]
-    B --> H[Business Translator Agent]
-    B --> I[Decision Maker Agent]
     
-    C --> J[Data Profiling & Quality Assessment]
-    D --> K[Market Research & Industry Analysis]
-    E --> L[Statistical Methodology Planning]
-    F --> M[Python Code Generation]
-    G --> N[Code Quality Assurance]
-    H --> O[Business Insights Translation]
-    I --> P[Executive Report Generation]
+    B --> C[Step 1: Data Understander Agent]
+    C --> D[Step 2: Market Researcher Agent]
+    D --> E[Step 3: Analysis Planner Agent]
     
-    J --> Q[PDF Report with Visualizations]
-    K --> Q
-    L --> Q
-    M --> Q
-    N --> Q
-    O --> Q
-    P --> Q
+    E --> F[Step 4-5: Coder-Reviewer Loop]
+    F --> G[Data Scientist Coder Agent]
+    G --> H[Code Reviewer Agent]
+    H --> I{Code Approved?}
+    I -->|No| J[Update Context & Retry]
+    J --> G
+    I -->|Yes| K[Execute Final Code]
+    
+    K --> L[Step 6: Business Translator Agent]
+    L --> M[Step 7: Decision Maker Agent]
+    M --> N[PDF Report with Visualizations]
+    
+    style F fill:#ffeb3b
+    style G fill:#ffeb3b
+    style H fill:#ffeb3b
+    style I fill:#ffeb3b
+    style J fill:#ffeb3b
 ```
 
 ### Agent Specialization Matrix
@@ -163,7 +162,7 @@ graph TD
 
 ### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/Nassirx1/multi-agent-analytics.git
+git clone https://github.com/yourusername/multi-agent-analytics.git
 cd multi-agent-analytics
 ```
 
@@ -199,6 +198,7 @@ jupyter notebook AI_analyzer.ipynb
 
 ### Supported Data Formats
 - **CSV Files** - Primary format with automatic detection
+- **Excel Files** - .xlsx format support
 - **Large Datasets** - Intelligent sampling for high-volume data
 - **Mixed Data Types** - Automatic type detection and handling
 
@@ -213,27 +213,40 @@ jupyter notebook AI_analyzer.ipynb
 ### Workflow Execution Flow
 
 ```python
-# 1. Data Understanding Phase
+# Sequential 7-Step Process:
+
+# Step 1: Data Understanding
 data_insights = data_understander.execute(csv_data)
 
-# 2. Market Research Phase  
-market_insights = market_researcher.execute(data_context)
+# Step 2: Market Research (uses data_insights)
+market_insights = market_researcher.execute(data_insights)
 
-# 3. Analysis Planning Phase
+# Step 3: Analysis Planning (uses both previous outputs)
 analysis_plan = planner.execute(data_insights, market_insights)
 
-# 4. Iterative Code Generation & Review
+# Steps 4-5: Iterative Coder-Reviewer Loop (up to 5 iterations)
 for iteration in range(max_iterations):
+    # Generate code based on analysis plan
     code = coder.execute(analysis_plan, csv_data, iteration)
-    test_results = execute_analysis_code(code)
+    
+    # Test the generated code
+    test_results = execute_analysis_code(code, test_mode=True)
+    
+    # If code executes successfully, break the loop
     if test_results["execution_status"] == "success":
         break
+    
+    # Otherwise, review the code and provide feedback
     review_feedback = reviewer.execute(code, analysis_plan, iteration)
+    # Feedback is used in next iteration
 
-# 5. Business Translation Phase
-business_insights = business_translator.execute(analysis_results, data_context)
+# Execute final approved code
+analysis_results = execute_analysis_code(final_code, test_mode=False)
 
-# 6. Final Report Generation
+# Step 6: Business Translation (uses analysis results)
+business_insights = business_translator.execute(analysis_results, data_insights)
+
+# Step 7: Final Report Generation (uses all outputs)
 final_report = decision_maker.execute(all_outputs, analysis_results, business_insights)
 ```
 
@@ -340,6 +353,15 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Python Data Science Stack** - Pandas, NumPy, Matplotlib, Seaborn
 
 ### Student Developer
-**Nassir Almotairi**  
+**Nassir Abdulhamid Almotairi**  
 *Data Science Student*  
 *Advanced AI & Data Science Focus*
+
+### Educational Context
+This project was developed as part of advanced coursework in:
+- Artificial Intelligence and Machine Learning
+- Data Science and Analytics
+- Software Engineering and System Design
+- Business Intelligence and Analytics
+
+
