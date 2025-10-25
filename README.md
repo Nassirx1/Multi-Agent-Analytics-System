@@ -353,7 +353,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Python Data Science Stack** - Pandas, NumPy, Matplotlib, Seaborn
 
 ### Student Developer
-**Nassir Abdulhamid Almotairi**  
+**Nassir Almotairi**  
 *Data Science Student*  
 *Advanced AI & Data Science Focus*
 
